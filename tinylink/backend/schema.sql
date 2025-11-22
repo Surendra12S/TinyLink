@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS links (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  short_code TEXT UNIQUE NOT NULL,
+  original_url TEXT NOT NULL,
+  clicks INTEGER DEFAULT 0,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  last_clicked_at TIMESTAMP WITH TIME ZONE
+);
+
+CREATE INDEX IF NOT EXISTS idx_links_short_code ON links(short_code);

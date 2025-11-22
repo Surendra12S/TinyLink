@@ -1,0 +1,95 @@
+# TinyLink
+
+A simple URL shortener similar to bit.ly, built with a decoupled architecture: Node.js/Express backend and plain HTML/CSS/JS frontend.
+
+## Project Structure
+
+```
+tinylink/
+├── backend/           # Node.js API Server
+│   ├── server.js      # Entry point
+│   ├── routes/        # API Routes
+│   ├── controllers/   # Request Handlers
+│   ├── services/      # Business Logic
+│   ├── db/            # Database Connection
+│   ├── scripts/       # Utility scripts (seed)
+│   └── .env           # Environment variables
+├── frontend/          # Static Frontend
+│   ├── index.html     # Dashboard
+│   ├── stats.html     # Stats Page
+│   ├── css/           # Styles
+│   └── js/            # Client-side Logic
+└── README.md          # This file
+```
+
+## Setup & Running
+
+### Backend
+
+1.  Navigate to the backend directory:
+    ```bash
+    cd backend
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Configure Environment:
+    Create `.env` with your PostgreSQL connection string (see `.env.example`).
+    ```
+    DATABASE_URL=postgres://...
+    PORT=3000
+    ```
+4.  Initialize Database:
+    ```bash
+    npm run seed
+    ```
+5.  Start Server:
+    ```bash
+    npm run dev
+    ```
+    Backend runs on `http://localhost:3000`.
+
+### Frontend
+
+1.  Navigate to the frontend directory:
+    ```bash
+    cd frontend
+    ```
+2.  Install dependencies (optional, for local server):
+    ```bash
+    npm install
+    ```
+3.  Start Static Server:
+    ```bash
+    npm start
+    ```
+    Or simply open `index.html` in your browser.
+
+## Deployment
+
+### Backend (Render / Railway)
+
+1.  Push the `backend` folder to a repository (or the whole repo and specify Root Directory as `backend`).
+2.  Set Build Command: `npm install`
+3.  Set Start Command: `node server.js`
+4.  Add Environment Variables: `DATABASE_URL`, `PORT` (optional).
+
+### Frontend (Netlify / Vercel)
+
+1.  Push the `frontend` folder to a repository.
+2.  Deploy as a static site.
+3.  **Important**: Update `API_URL` and `BASE_URL` in `frontend/js/main.js` and `frontend/js/stats.js` to point to your deployed Backend URL.
+
+## API Endpoints
+
+-   `POST /api/links`: Create short link
+-   `GET /api/links`: List all links
+-   `GET /api/links/:code`: Get link stats
+-   `DELETE /api/links/:code`: Delete link
+-   `GET /:code`: Redirect to original URL
+-   `GET /healthz`: Health check
+
+## Database Schema
+
+See `backend/db/schema.sql`.
