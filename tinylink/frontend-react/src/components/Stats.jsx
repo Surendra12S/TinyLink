@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { fetchLinkStats } from '../api';
 import ThemeToggle from './ThemeToggle';
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export default function Stats() {
     const [searchParams] = useSearchParams();
